@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var db:OpaquePointer? = nil
+    var stmt:OpaquePointer? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,12 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let srcDB = Bundle.main.path(forResource: "iii", ofType: "db")
         let tagDB = NSHomeDirectory() + "/Documents/iii.db"
         if !fmgr.fileExists(atPath: tagDB) {
+            
             try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
-            //sqlite3_open(tagDB, &db)
+            sqlite3_open(tagDB, &db)
             // 匯入遠端資料
             importRemoteData()
         }else{
-            //sqlite3_open(tagDB, &db)
+            
+            try? fmgr.removeItem(atPath: tagDB)
+            try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
+            
+            sqlite3_open(tagDB, &db)
             importRemoteData()
         }
         
@@ -36,15 +42,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func importRemoteData(){
         Alamofire.request("http://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvAttractions.aspx").responseJSON { response in
             if let data = response.data {
+                let sql = "insert into travel (tid,name,tel,intro,addr,city,town,lat,lng,photo) values (?,?,?,?,?,?,?,?,?,?)"
+                sqlite3_prepare(self.db, sql, -1, &self.stmt, nil)
+                
                 let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
                 for row in json as! [[String:String]] {
                     print("\(row["Name"] ?? "xx") : \(row["Coordinate"] ?? "xx") : \(row["Photo"] ?? "xx")")
+                    
+                    
+                    
                 }
                 
             }
         }
     }
     
+    // insert into
+    private func insertData(tid:String, name:String, tel:String, intro:String, addr:String, city:String, town:String, lat:String, lng:String, photo:String){
+        // 整理傳遞參數 => cString
+        let ctid = tid.cString(using: .utf8)
+        let cname = name.cString(using: .utf8)
+        let ctel = tel.cString(using: .utf8)
+        let cintro = intro.cString(using: .utf8)
+        let caddr = addr.cString(using: .utf8)
+        let ccity = city.cString(using: .utf8)
+        let ctown = town.cString(using: .utf8)
+        let clat = lat.cString(using: .utf8)
+        let clng = lng.cString(using: .utf8)
+        let cphoto = photo.cString(using: .utf8)
+    
+        sqlite3_bind_text(stmt!, 1, ctid, -1, nil)
+        sqlite3_bind_text(stmt!, 2, cname, -1, nil)
+        sqlite3_bind_text(stmt!, 3, ctel, -1, nil)
+        sqlite3_bind_text(stmt!, 4, cintro, -1, nil)
+        sqlite3_bind_text(stmt!, 5, caddr, -1, nil)
+        sqlite3_bind_text(stmt!, 6, ccity, -1, nil)
+        sqlite3_bind_text(stmt!, 7, ctown, -1, nil)
+        sqlite3_bind_text(stmt!, 8, clat, -1, nil)
+        sqlite3_bind_text(stmt!, 9, clng, -1, nil)
+        sqlite3_bind_text(stmt!, 10, cphoto, -1, nil)
+        
+        sqlite3_step(stmt!)
+        
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
