@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,18 +22,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tagDB = NSHomeDirectory() + "/Documents/iii.db"
         if !fmgr.fileExists(atPath: tagDB) {
             try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
-            sqlite3_open(tagDB, &db)
+            //sqlite3_open(tagDB, &db)
             // 匯入遠端資料
             importRemoteData()
         }else{
-            sqlite3_open(tagDB, &db)
+            //sqlite3_open(tagDB, &db)
+            importRemoteData()
         }
         
         return true
     }
 
     private func importRemoteData(){
-        
+        Alamofire.request("http://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvAttractions.aspx").responseJSON { response in
+            if let data = response.data {
+                let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                for row in json as! [[String:String]] {
+                    print("\(row["Name"] ?? "xx") : \(row["Coordinate"] ?? "xx") : \(row["Photo"] ?? "xx")")
+                }
+                
+            }
+        }
     }
     
     
