@@ -34,6 +34,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="mWC-38-cQw"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="x6n-yj-fu5"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -56,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="498" y="117"/>
         </scene>
-        <!--View Controller-->
+        <!--DetailVC-->
         <scene sceneID="Him-A5-PsN">
             <objects>
-                <viewController id="gTS-st-EiF" sceneMemberID="viewController">
+                <viewController id="gTS-st-EiF" customClass="DetailVC" customModule="MyTravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dbD-WH-gyR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
