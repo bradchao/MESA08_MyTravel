@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var db:OpaquePointer? = nil
     var stmt:OpaquePointer? = nil
+    
+    var i = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -22,19 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let srcDB = Bundle.main.path(forResource: "iii", ofType: "db")
         let tagDB = NSHomeDirectory() + "/Documents/iii.db"
         if !fmgr.fileExists(atPath: tagDB) {
-            
             try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
             sqlite3_open(tagDB, &db)
             // 匯入遠端資料
             importRemoteData()
         }else{
-            
-            try? fmgr.removeItem(atPath: tagDB)
-            try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
-            
             sqlite3_open(tagDB, &db)
-            importRemoteData()
         }
+        
         
         return true
     }
@@ -44,15 +41,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let data = response.data {
                 let sql = "insert into travel (tid,name,tel,intro,addr,city,town,lat,lng,photo) values (?,?,?,?,?,?,?,?,?,?)"
                 sqlite3_prepare(self.db, sql, -1, &self.stmt, nil)
-                
+
                 let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
                 for row in json as! [[String:String]] {
-                    print("\(row["Name"] ?? "xx") : \(row["Coordinate"] ?? "xx") : \(row["Photo"] ?? "xx")")
+                    sqlite3_reset(self.stmt)
+                    sqlite3_prepare(self.db, sql, -1, &self.stmt, nil)
+
+                    let temp = row["Coordinate"]
+                    let latlng = temp?.characters.split(separator: ",").map(String.init)
+                    let lat = latlng!.count<1 ? "" : latlng![0]
+                    let lng = latlng!.count<2 ? "" : latlng![1]
                     
-                    
+                    self.insertData(tid: row["ID"] ?? "xx", name: row["Name"] ?? "xx", tel: row["Tel"] ?? "xx", intro: row["Introduction"] ?? "xx", addr: row["Address"] ?? "xx", city: row["City"] ?? "xx", town: row["Town"] ?? "xx", lat: lat, lng: lng, photo: row["Photo"] ?? "xx")
                     
                 }
-                
+                print("count:\(self.i)")
             }
         }
     }
@@ -82,7 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sqlite3_bind_text(stmt!, 9, clng, -1, nil)
         sqlite3_bind_text(stmt!, 10, cphoto, -1, nil)
         
-        sqlite3_step(stmt!)
+        if sqlite3_step(stmt!) == SQLITE_DONE {
+            i += 1
+        }
         
     }
     
