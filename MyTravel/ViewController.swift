@@ -62,6 +62,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        queryAll()
     }
+    
+    private func queryAll(){
+        if let _ = app.db {
+            let keyword = "美食"
+            let search = "%\(keyword)%"
+            let csearch = search.cString(using: .utf8)
+            
+            let sql = "select * from travel where intro like ?"
+            var stmt:OpaquePointer? = nil
+            
+            if sqlite3_prepare(app.db, sql, -1, &stmt, nil) != SQLITE_OK {
+                // 出錯
+                print("error1: id :\(app.nowId)")
+            }
+            
+            
+            sqlite3_bind_text(stmt, 1, csearch, -1, nil)
+            
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                // 有資料回來
+                let cid = sqlite3_column_text(stmt, 0)
+                let cname = sqlite3_column_text(stmt, 1)
+                let cphoto = sqlite3_column_text(stmt, 2)
+                let ccity = sqlite3_column_text(stmt, 6)
+
+                let id = String(cString: cid!)
+                let name = String(cString: cname!)
+                let photo = String(cString: cphoto!)
+                let city = String(cString: ccity!)
+
+                print("\(id):\(name):\(photo):\(city)")
+                
+            }
+        }
+
+    }
+    
 }
 
