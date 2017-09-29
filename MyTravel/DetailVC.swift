@@ -25,6 +25,9 @@ class DetailVC: UIViewController {
         let mydata = getData(id: app.nowId)
 //        print("return:\(mydata.name) : \(mydata.photo)")
         
+        app.nowLat = mydata.lat
+        app.nowLng = mydata.lng
+        
         nameLabel.text = mydata.name
         
         
@@ -58,22 +61,22 @@ class DetailVC: UIViewController {
         
     }
     
-    private func getData(id:String) -> (name:String, photo:String, intro:String) {
+    private func getData(id:String) -> (name:String, photo:String, intro:String, lat:Double, lng:Double) {
         if let _ = app.db {
-            let sql = "select id,name,photo,intro from travel where id = ?"
+            let sql = "select id,name,photo,intro,lat,lng from travel where id = ?"
             var stmt:OpaquePointer? = nil
             
             if sqlite3_prepare(app.db, sql, -1, &stmt, nil) != SQLITE_OK {
                 // 出錯
                 print("error1: id :\(app.nowId)")
-                return ("error1","error1","")
+                return ("error1","error1","",0,0)
             }
             
             let cid = id.cString(using: .utf8);
             if sqlite3_bind_text(stmt, 1, cid, -1, nil) != SQLITE_OK {
                 // 出錯
                 print("error2: id :\(app.nowId)")
-                return ("error2","error2","")
+                return ("error2","error2","",0,0)
             }
             
             if sqlite3_step(stmt) == SQLITE_ROW {
@@ -81,19 +84,23 @@ class DetailVC: UIViewController {
                 let cname = sqlite3_column_text(stmt, 1)
                 let cphoto = sqlite3_column_text(stmt, 2)
                 let cintro = sqlite3_column_text(stmt, 3)
+                let clat = sqlite3_column_double(stmt, 4)
+                let clng = sqlite3_column_double(stmt, 5)
+                
                 let name = String(cString: cname!)
                 let photo = String(cString: cphoto!)
                 let intro = String(cString: cintro!)
-                return (name, photo, intro)
+                
+                return (name, photo, intro, clat, clng)
             }else{
                 // 無資料
                 let cerrmsg = sqlite3_errmsg(app.db)
                 let errmsg = String(cString: cerrmsg!, encoding: String.Encoding.utf8 )
                 print(errmsg)
-                return ("error3","error3","")
+                return ("error3","error3","",0,0)
             }
         }
-        return ("","","")
+        return ("","","",0,0)
     }
     
     

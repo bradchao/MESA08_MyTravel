@@ -30,7 +30,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="gTS-st-EiF" kind="show" id="ARy-OO-Tqc"/>
+                                            <segue destination="gTS-st-EiF" kind="show" id="V1a-zT-9GW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="498" y="117"/>
         </scene>
-        <!--DetailVC-->
+        <!--詳細資料-->
         <scene sceneID="Him-A5-PsN">
             <objects>
                 <viewController id="gTS-st-EiF" customClass="DetailVC" customModule="MyTravel" customModuleProvider="target" sceneMemberID="viewController">
@@ -77,34 +77,42 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PnS-hS-BcS">
                                 <rect key="frame" x="0.0" y="103.5" width="375" height="200"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NSY-2U-Jd0">
-                                <rect key="frame" x="0.0" y="303.5" width="375" height="363.5"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-ei-T8l">
+                                <rect key="frame" x="177" y="193" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HH6-iP-ocq">
+                                <rect key="frame" x="16" y="318" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="Hbe-9T-iqp" kind="show" id="Zg9-ln-I7d"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NSY-2U-Jd0">
+                                <rect key="frame" x="0.0" y="439" width="375" height="192"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="i1G-ei-T8l">
-                                <rect key="frame" x="177" y="193" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NSY-2U-Jd0" firstAttribute="top" secondItem="PnS-hS-BcS" secondAttribute="bottom" id="4sO-yi-cgB"/>
-                            <constraint firstItem="deV-UP-acG" firstAttribute="bottom" secondItem="NSY-2U-Jd0" secondAttribute="bottom" id="CzX-mV-ZI7"/>
-                            <constraint firstItem="NSY-2U-Jd0" firstAttribute="leading" secondItem="deV-UP-acG" secondAttribute="leading" id="LbK-Dv-9s5"/>
                             <constraint firstItem="ije-gi-sZ8" firstAttribute="top" secondItem="deV-UP-acG" secondAttribute="top" id="Rbx-FU-QoC"/>
                             <constraint firstItem="PnS-hS-BcS" firstAttribute="leading" secondItem="deV-UP-acG" secondAttribute="leading" id="VNd-28-jeX"/>
                             <constraint firstItem="deV-UP-acG" firstAttribute="trailing" secondItem="ije-gi-sZ8" secondAttribute="trailing" id="bUi-9R-cWs"/>
                             <constraint firstItem="PnS-hS-BcS" firstAttribute="top" secondItem="ije-gi-sZ8" secondAttribute="bottom" id="f72-k2-DtT"/>
                             <constraint firstItem="deV-UP-acG" firstAttribute="trailing" secondItem="PnS-hS-BcS" secondAttribute="trailing" id="lZl-kf-XFe"/>
-                            <constraint firstItem="deV-UP-acG" firstAttribute="trailing" secondItem="NSY-2U-Jd0" secondAttribute="trailing" id="uq8-Pg-8cc"/>
                             <constraint firstItem="PnS-hS-BcS" firstAttribute="height" secondItem="dbD-WH-gyR" secondAttribute="height" multiplier="0.3" id="uu2-Xv-wCR"/>
                             <constraint firstItem="ije-gi-sZ8" firstAttribute="leading" secondItem="deV-UP-acG" secondAttribute="leading" id="vdM-5E-2Ua"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="deV-UP-acG"/>
                     </view>
+                    <navigationItem key="navigationItem" title="詳細資料" id="DWh-4l-Gg4">
+                        <barButtonItem key="backBarButtonItem" title="返回" id="SlY-bi-mIT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="indicator" destination="i1G-ei-T8l" id="2bt-BX-g8k"/>
                         <outlet property="introText" destination="NSY-2U-Jd0" id="99v-o7-4nE"/>
@@ -114,7 +122,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1R-wT-Fyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1191" y="116"/>
+            <point key="canvasLocation" x="1540" y="116"/>
+        </scene>
+        <!--MapVC-->
+        <scene sceneID="2Mh-hZ-Wff">
+            <objects>
+                <viewController id="Hbe-9T-iqp" customClass="MapVC" customModule="MyTravel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qfz-YA-X3a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gpa-im-d6a">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Gpa-im-d6a" firstAttribute="top" secondItem="iNV-3E-K5u" secondAttribute="top" id="VWL-4V-9qy"/>
+                            <constraint firstItem="Gpa-im-d6a" firstAttribute="leading" secondItem="iNV-3E-K5u" secondAttribute="leading" id="cic-FR-2Df"/>
+                            <constraint firstItem="iNV-3E-K5u" firstAttribute="bottom" secondItem="Gpa-im-d6a" secondAttribute="bottom" id="dhr-V5-XoK"/>
+                            <constraint firstItem="iNV-3E-K5u" firstAttribute="trailing" secondItem="Gpa-im-d6a" secondAttribute="trailing" id="zAb-Bd-vC6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iNV-3E-K5u"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Gpa-im-d6a" id="Fvc-Zv-APT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pfG-t5-nsK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2420" y="88"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NbQ-qv-xpm">

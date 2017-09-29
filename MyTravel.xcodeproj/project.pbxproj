@@ -15,6 +15,8 @@
 		374522C21F7C85A500B9444B /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 374522C11F7C85A500B9444B /* libsqlite3.tbd */; };
 		374522C31F7C85B200B9444B /* iii.db in Resources */ = {isa = PBXBuildFile; fileRef = 374522BE1F7C84BE00B9444B /* iii.db */; };
 		374522C51F7CAA6E00B9444B /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374522C41F7CAA6E00B9444B /* DetailVC.swift */; };
+		377F63861F7E190200CAE028 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 377F63851F7E190200CAE028 /* MapKit.framework */; };
+		377F63881F7E198000CAE028 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377F63871F7E198000CAE028 /* MapVC.swift */; };
 		F1E766A04FAF0DEA08995167 /* Pods_MyTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA182C403A7D70E61EB43697 /* Pods_MyTravel.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +32,8 @@
 		374522BF1F7C852900B9444B /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		374522C11F7C85A500B9444B /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		374522C41F7CAA6E00B9444B /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		377F63851F7E190200CAE028 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		377F63871F7E198000CAE028 /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		4923CFDB99145E3B9C240A7E /* Pods-MyTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravel.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravel/Pods-MyTravel.release.xcconfig"; sourceTree = "<group>"; };
 		67293359DB67DE55DC567104 /* Pods-MyTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTravel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTravel/Pods-MyTravel.debug.xcconfig"; sourceTree = "<group>"; };
 		BA182C403A7D70E61EB43697 /* Pods_MyTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +45,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				374522C21F7C85A500B9444B /* libsqlite3.tbd in Frameworks */,
+				377F63861F7E190200CAE028 /* MapKit.framework in Frameworks */,
 				F1E766A04FAF0DEA08995167 /* Pods_MyTravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +83,7 @@
 				374522B81F7C826400B9444B /* Info.plist */,
 				374522BF1F7C852900B9444B /* Header.h */,
 				374522C41F7CAA6E00B9444B /* DetailVC.swift */,
+				377F63871F7E198000CAE028 /* MapVC.swift */,
 			);
 			path = MyTravel;
 			sourceTree = "<group>";
@@ -85,6 +91,7 @@
 		374522C01F7C85A500B9444B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				377F63851F7E190200CAE028 /* MapKit.framework */,
 				374522C11F7C85A500B9444B /* libsqlite3.tbd */,
 				BA182C403A7D70E61EB43697 /* Pods_MyTravel.framework */,
 			);
@@ -136,6 +143,11 @@
 					374522A81F7C826400B9444B = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -231,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				374522AF1F7C826400B9444B /* ViewController.swift in Sources */,
+				377F63881F7E198000CAE028 /* MapVC.swift in Sources */,
 				374522AD1F7C826400B9444B /* AppDelegate.swift in Sources */,
 				374522C51F7CAA6E00B9444B /* DetailVC.swift in Sources */,
 			);

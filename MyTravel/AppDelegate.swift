@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import MapKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,8 +19,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var i = 0
     var nowId = ""
+    var nowLat:Double = 0
+    var nowLng:Double = 0
+    
 
+    let lmgr = CLLocationManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        lmgr.requestWhenInUseAuthorization()
         
         let fmgr = FileManager.default
         let srcDB = Bundle.main.path(forResource: "iii", ofType: "db")
