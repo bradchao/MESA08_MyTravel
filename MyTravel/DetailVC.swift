@@ -44,6 +44,7 @@ class DetailVC: UIViewController {
                     DispatchQueue.main.async {
                         self.indicator.isHidden = true
                     }
+                    
                 }
             }else {
                 print("photo:\(mydata.photo)")
