@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fmgr = FileManager.default
         let srcDB = Bundle.main.path(forResource: "iii", ofType: "db")
         let tagDB = NSHomeDirectory() + "/Documents/iii.db"
+        
         if !fmgr.fileExists(atPath: tagDB) {
+            try? fmgr.removeItem(atPath: tagDB)
             try? fmgr.copyItem(atPath: srcDB!, toPath: tagDB)
             sqlite3_open(tagDB, &db)
             // 匯入遠端資料

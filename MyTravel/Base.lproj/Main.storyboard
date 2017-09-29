@@ -90,6 +90,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="deV-UP-acG"/>
                     </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="ije-gi-sZ8" id="VHn-0I-Wcc"/>
+                        <outlet property="photoImage" destination="PnS-hS-BcS" id="1dh-jg-jcX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1R-wT-Fyn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
